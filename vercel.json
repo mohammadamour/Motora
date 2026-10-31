@@ -56,6 +56,7 @@
     "SESSION_DRIVER": "cookie",
     "SESSION_SECURE_COOKIE": "true",
     "QUEUE_CONNECTION": "sync",
-    "APP_KEY": "base64:3IrYUAe2bXobMkr+HKsqB/z29DfEyFHLTJHwRz0ElSs="
+    "APP_KEY": "base64:3IrYUAe2bXobMkr+HKsqB/z29DfEyFHLTJHwRz0ElSs=",
+    "APP_URL": "https://motora-eight.vercel.app"
   }
 }
