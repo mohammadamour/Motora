@@ -1,0 +1,17 @@
+node_modules
+.git
+tests
+test_drive
+docker
+.phpunit.result.cache
+.phpunit.cache
+_ide_helper.php
+_ide_helper_models.php
+.phpstorm.meta.php
+*.md
+.editorconfig
+.prettierrc
+Dockerfile
+render.yaml
+docker-compose.yml
+
