@@ -4,7 +4,7 @@
         <!-- Carousel wrapper -->
         <div class="hero-slides">
             <!-- Item 1 -->
-            <div class="hero-slide">
+            <div class="hero-slide active">
                 <div class="container">
                     <div class="slide-content">
                         <h1 class="hero-slider-title">
@@ -27,8 +27,8 @@
                     </div>
                     <div class="slide-image">
                         <img
-                            src="/img/car-png-39071.png"
-                            alt=""
+                            src="{{ asset('img/car-png-39071.png') }}"
+                            alt="Featured Car"
                             class="img-responsive"
                         />
                     </div>
@@ -57,8 +57,8 @@
                     </div>
                     <div class="slide-image">
                         <img
-                            src="/img/car-png-39071.png"
-                            alt=""
+                            src="{{ asset('img/car-png-39071.png') }}"
+                            alt="Featured Car"
                             class="img-responsive"
                         />
                     </div>

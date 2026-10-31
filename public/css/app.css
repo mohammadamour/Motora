@@ -666,6 +666,27 @@ section > .container {
 
 .hero-slide .container {
   display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.slide-content {
+  flex: 1 1 50%;
+}
+
+.slide-image {
+  flex: 1 1 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.slide-image img {
+  max-width: 100%;
+  height: auto;
+  display: block;
 }
 
 .hero-slide-prev,
@@ -699,11 +720,6 @@ section > .container {
 
 .hero-slide-next {
   right: 0;
-}
-
-.slide-content,
-.slide-image {
-  flex: 1;
 }
 
 .hero-slider {

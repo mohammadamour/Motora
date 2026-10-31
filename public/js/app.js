@@ -237,15 +237,5 @@ document.addEventListener("DOMContentLoaded", function () {
   initMobileFilters();
   initCascadingDropdown('#makerSelect', '#modelSelect');
   initCascadingDropdown('#stateSelect', '#citySelect');
-  initSortingDropdown()
-
-  ScrollReveal().reveal(".hero-slide.active .hero-slider-title", {
-    delay: 200,
-    reset: true,
-  });
-  ScrollReveal().reveal(".hero-slide.active .hero-slider-content", {
-    delay: 200,
-    origin: "bottom",
-    distance: "50%",
-  });
+  initSortingDropdown();
 });
