@@ -109,14 +109,18 @@ class CarController extends Controller
 
         // 4. Handle Image Uploads
         if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $index => $image) {
-                $path = $image->store("img/cars/{$car->id}", 'public');
+            try {
+                foreach ($request->file('images') as $index => $image) {
+                    $path = $image->store("img/cars/{$car->id}", 'public');
 
-                CarImages::create([
-                    'car_id' => $car->id,
-                    'image_path' => "/storage/" . $path,
-                    'position' => $index + 1
-                ]);
+                    CarImages::create([
+                        'car_id' => $car->id,
+                        'image_path' => "/storage/" . $path,
+                        'position' => $index + 1
+                    ]);
+                }
+            } catch (\Throwable $e) {
+                \Illuminate\Support\Facades\Log::warning('Image upload skipped or failed: ' . $e->getMessage());
             }
         }
 
@@ -222,15 +226,19 @@ class CarController extends Controller
 
         // 4. Handle Image Uploads (Append new images)
         if ($request->hasFile('images')) {
-            $currentMaxPosition = $car->images()->max('position') ?? 0;
-            foreach ($request->file('images') as $index => $image) {
-                $path = $image->store("img/cars/{$car->id}", 'public');
+            try {
+                $currentMaxPosition = $car->images()->max('position') ?? 0;
+                foreach ($request->file('images') as $index => $image) {
+                    $path = $image->store("img/cars/{$car->id}", 'public');
 
-                CarImages::create([
-                    'car_id' => $car->id,
-                    'image_path' => "/storage/" . $path,
-                    'position' => $currentMaxPosition + $index + 1
-                ]);
+                    CarImages::create([
+                        'car_id' => $car->id,
+                        'image_path' => "/storage/" . $path,
+                        'position' => $currentMaxPosition + $index + 1
+                    ]);
+                }
+            } catch (\Throwable $e) {
+                \Illuminate\Support\Facades\Log::warning('Image update upload failed: ' . $e->getMessage());
             }
         }
 

@@ -7,7 +7,14 @@ error_reporting(E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED);
 
 // 1. Prepare writable storage directories in /tmp for serverless execution
 $dirs = [
+    '/tmp/storage',
+    '/tmp/storage/app',
+    '/tmp/storage/app/public',
+    '/tmp/storage/app/public/img',
+    '/tmp/storage/app/public/img/cars',
+    '/tmp/storage/framework',
     '/tmp/storage/framework/views',
+    '/tmp/storage/framework/cache',
     '/tmp/storage/framework/cache/data',
     '/tmp/storage/framework/sessions',
     '/tmp/storage/logs',
@@ -16,7 +23,7 @@ $dirs = [
 
 foreach ($dirs as $dir) {
     if (!is_dir($dir)) {
-        @mkdir($dir, 0755, true);
+        @mkdir($dir, 0777, true);
     }
 }
 
@@ -30,14 +37,19 @@ if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROT
     $_SERVER['SERVER_PORT'] = 443;
 }
 
-// 4. Copy pre-seeded SQLite database to writable /tmp on cold start
+// 4. Copy pre-seeded SQLite database to writable /tmp on cold start and grant write access
 $sqliteTarget = '/tmp/database.sqlite';
 $sqliteSource = __DIR__ . '/../database/database.sqlite';
 if (!file_exists($sqliteTarget) && file_exists($sqliteSource)) {
     @copy($sqliteSource, $sqliteTarget);
 }
+if (file_exists($sqliteTarget)) {
+    @chmod($sqliteTarget, 0666);
+}
 
 // 5. Set environment variable paths for serverless
+$_ENV['LARAVEL_STORAGE_PATH'] = '/tmp/storage';
+putenv('LARAVEL_STORAGE_PATH=/tmp/storage');
 putenv('APP_STORAGE=/tmp/storage');
 putenv('VIEW_COMPILED_PATH=/tmp/storage/framework/views');
 putenv('APP_CONFIG_CACHE=/tmp/bootstrap/cache/config.php');

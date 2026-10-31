@@ -19,6 +19,14 @@ Route::middleware(['auth'])->group(function () {
 
 Route::get('/car/{car}', [CarController::class, 'show'])->name('car.show');
 
+Route::get('/storage/{path}', function (string $path) {
+    $fullPath = storage_path('app/public/' . $path);
+    if (!file_exists($fullPath)) {
+        abort(404);
+    }
+    return response()->file($fullPath);
+})->where('path', '.*')->name('storage.local');
+
 Route::get('/signup', [SignupController::class, 'create'])->name('signup');
 Route::post('/signup', [SignupController::class, 'sign'])->name('sign');
 Route::get('/login', [LoginController::class, 'create'])->name('login');

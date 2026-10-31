@@ -27,7 +27,7 @@
     },
     {
       "src": "/storage/(.*)",
-      "dest": "/public/storage/$1"
+      "dest": "/api/index.php"
     },
     {
       "src": "/(.*\\.(?:png|jpg|jpeg|gif|svg|ico|avif|webp))$",
@@ -49,8 +49,9 @@
   "env": {
     "APP_NAME": "Motora",
     "APP_ENV": "production",
-    "APP_DEBUG": "false",
+    "APP_DEBUG": "true",
     "APP_STORAGE": "/tmp/storage",
+    "LARAVEL_STORAGE_PATH": "/tmp/storage",
     "CACHE_STORE": "array",
     "LOG_CHANNEL": "stderr",
     "SESSION_DRIVER": "cookie",
